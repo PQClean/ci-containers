@@ -1,0 +1,52 @@
+---
+name: $(Date:yyyyMMdd).$(Rev:.r)
+
+
+stages:
+- stage: Build
+
+  jobs:
+  - job: build_container_emulated
+    displayName: Build container for architecture
+    pool:
+      vmImage: "ubuntu-16.04"
+    strategy:
+      matrix:
+        armhf:
+          arch: armhf
+        arm64:
+          arch: arm64
+        i386:
+          arch: i386
+        amd64:
+          arch: amd64
+    steps:
+    - script: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+      displayName: Register QEMU wrappers
+    - checkout: self
+      fetchDepth: 1
+    - script: |
+        docker build -t "pqclean/ci-container:$(arch)" --build-arg "ARCH=$(arch)" debian-buster
+      displayName: Build container
+    - script: |
+        docker login --username $(dockerUsername) --password "$(dockerPassword)"
+        docker push "pqclean/ci-container:$(arch)"
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+      displayName: "Push to Docker hub"
+  - job: build_container_powerpc
+    displayName: Build container for PowerPC
+    pool:
+      vmImage: "ubuntu-16.04"
+    steps:
+    - script: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+      displayName: Register QEMU wrappers
+    - checkout: self
+      fetchDepth: 1
+    - script: |
+        docker build -t "pqclean/ci-container:unstable-ppc" debian-unstable-ppc
+      displayName: Build container
+    - script: |
+        docker login --username $(dockerUsername) --password "$(dockerPassword)"
+        docker push "pqclean/ci-container:unstable-ppc"
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+      displayName: "Push to Docker hub"
