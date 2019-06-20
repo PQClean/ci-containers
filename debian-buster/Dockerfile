@@ -23,7 +23,7 @@ RUN apt-get update -qq \
  # Install GCC 9
  && echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list \
  && apt-get update -qq \
- && apt-get -t experimental install -y -q gcc \
+ && apt-get -t experimental install -y -q gcc clang \
  && apt-get autoremove -y \
 # Cleanup
  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*

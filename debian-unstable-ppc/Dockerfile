@@ -28,7 +28,7 @@ RUN wget http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archi
         python3-yaml \
 # GCC 9
  && apt-get -t experimental install -y \
-        gcc \
+        gcc clang \
  && apt-get autoremove -y \
 # Cleanup
  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
