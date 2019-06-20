@@ -15,7 +15,6 @@ RUN wget http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archi
 # Install build dependencies
  && apt-get install -y \
         astyle \
-        clang \
         clang-tidy \
         git-core \
         make \

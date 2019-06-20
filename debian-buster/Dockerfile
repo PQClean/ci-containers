@@ -7,9 +7,7 @@ RUN apt-get update -qq \
 # Install build dependencies
  && apt-get install -y -q \
         astyle \
-        clang \
         clang-tidy \
-        gcc \
         git-core \
         make \
         python3-dev \
