@@ -17,7 +17,6 @@ RUN wget http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archi
         astyle \
         clang \
         clang-tidy \
-        gcc \
         git-core \
         make \
         python3-dev \
@@ -27,5 +26,9 @@ RUN wget http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archi
         python3-pycparser \
         python3-rednose \
         python3-yaml \
+# GCC 9
+ && apt-get -t experimental install -y \
+        gcc \
+ && apt-get autoremove -y \
 # Cleanup
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* /var/cache/apt/*

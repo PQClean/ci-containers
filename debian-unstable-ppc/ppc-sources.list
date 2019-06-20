@@ -1,2 +1,3 @@
 deb http://ftp.ports.debian.org/debian-ports/ unstable main
 deb http://ftp.ports.debian.org/debian-ports/ unreleased main
+deb http://ftp.ports.debian.org/debian-ports/ experimental main
