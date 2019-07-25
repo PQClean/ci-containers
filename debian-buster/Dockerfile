@@ -20,7 +20,7 @@ RUN apt-get update -qq \
         valgrind \
  # Install GCC 9
  && echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list \
- && echo "deb http://deb.debian.org/debian testing main" >> /etc/apt/sources.list \
+ && echo "deb http://deb.debian.org/debian unstable main" >> /etc/apt/sources.list \
  && apt-get update -qq \
  && apt-get -t experimental install -y -q gcc clang \
  && apt-get autoremove -y \
