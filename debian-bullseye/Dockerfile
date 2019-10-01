@@ -1,5 +1,5 @@
 ARG ARCH
-FROM multiarch/debian-debootstrap:${ARCH}-buster
+FROM multiarch/debian-debootstrap:${ARCH}-bullseye
 
 RUN apt-get update -qq \
  && apt-get upgrade -y \
@@ -7,7 +7,9 @@ RUN apt-get update -qq \
 # Install build dependencies
  && apt-get install -y -q \
         astyle \
+        clang \
         clang-tidy \
+        gcc \
         git-core \
         make \
         python3-dev \
@@ -18,11 +20,6 @@ RUN apt-get update -qq \
         python3-rednose \
         python3-yaml \
         valgrind \
- # Install GCC 9
- && echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list \
- && echo "deb http://deb.debian.org/debian unstable main" >> /etc/apt/sources.list \
- && apt-get update -qq \
- && apt-get -t experimental install -y -q gcc clang \
  && apt-get autoremove -y \
 # Cleanup
  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
