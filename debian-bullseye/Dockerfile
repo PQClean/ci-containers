@@ -22,5 +22,7 @@ RUN apt-get update -qq \
         python3-yaml \
         valgrind \
  && apt-get autoremove -y \
+# Python deps
+ && pip3 install PyYAML pytest pytest-xdist pycparser py-cpuinfo \
 # Cleanup
  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
