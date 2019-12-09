@@ -8,6 +8,7 @@ RUN apt-get update -qq \
  && apt-get install -y -q \
         astyle \
         clang \
+        ccache \
         clang-tidy \
         gcc \
         git-core \
