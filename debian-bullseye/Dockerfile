@@ -7,9 +7,7 @@ RUN apt-get update -qq \
 # Install build dependencies
  && apt-get install -y -q \
         astyle \
-        clang \
         ccache \
-        clang-tidy \
         gcc \
         git-core \
         make \
@@ -21,6 +19,10 @@ RUN apt-get update -qq \
         python3-rednose \
         python3-yaml \
         valgrind \
+# Install clang 9
+ && echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list.d/experimental.conf \
+ && apt-get update -qq \
+ && apt-get install clang-9 clang-tidy-9 \
  && apt-get autoremove -y \
 # Python deps
  && pip3 install PyYAML pytest pytest-xdist pycparser py-cpuinfo \
