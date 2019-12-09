@@ -20,9 +20,11 @@ RUN apt-get update -qq \
         python3-yaml \
         valgrind \
 # Install clang 9
- && echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list.d/experimental.conf \
+ && echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list.d/experimental.list \
  && apt-get update -qq \
  && apt-get install -y -q clang-9 clang-tidy-9 \
+ && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-9 100 \
+ && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-9 100 \
  && apt-get autoremove -y \
 # Python deps
  && pip3 install PyYAML pytest pytest-xdist pycparser py-cpuinfo \
