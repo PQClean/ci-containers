@@ -22,7 +22,7 @@ RUN apt-get update -qq \
 # Install clang 9
  && echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list.d/experimental.conf \
  && apt-get update -qq \
- && apt-get install clang-9 clang-tidy-9 \
+ && apt-get install -y -q clang-9 clang-tidy-9 \
  && apt-get autoremove -y \
 # Python deps
  && pip3 install PyYAML pytest pytest-xdist pycparser py-cpuinfo \
