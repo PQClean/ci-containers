@@ -4,10 +4,10 @@ RUN echo "APT::Acquire::Retries \"3\";" > /etc/apt/apt.conf.d/80-retries
 
 COPY ppc-sources.list /etc/apt/sources.list
 
-RUN wget http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archive-keyring/debian-ports-archive-keyring_2018.12.27_all.deb \
+RUN wget http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archive-keyring/debian-ports-archive-keyring_2019.11.05_all.deb \
 # Install debian-ports keychain
- && dpkg -i debian-ports-archive-keyring_2018.12.27_all.deb \
- && rm debian-ports-archive-keyring_2018.12.27_all.deb \
+ && dpkg -i debian-ports-archive-keyring_2019.11.05_all.deb \
+ && rm debian-ports-archive-keyring_2019.11.05_all.deb \
 # Update to unstable
  && apt-get update -qq \
  && apt-get upgrade -y \
