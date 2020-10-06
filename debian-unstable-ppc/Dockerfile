@@ -8,10 +8,10 @@ RUN wget http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archi
  && rm debian-ports-archive-keyring_2019.11.05_all.deb \
 # Update to unstable
  && apt-get update -qq \
- && apt-get upgrade -y  -o Dpkg::Options::="--force-overwrite" \
- && apt-get dist-upgrade -y -o Dpkg::Options::="--force-overwrite" \
+ && apt-get upgrade -q -y \
+ && apt-get dist-upgrade -q -y \
 # Install build dependencies
- && apt-get install -y \
+ && apt-get install -q -y \
         astyle \
         ccache \
         clang \
