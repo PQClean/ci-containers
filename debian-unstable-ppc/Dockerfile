@@ -1,6 +1,4 @@
-FROM multiarch/debian-debootstrap:powerpc-jessie
-
-RUN echo "APT::Acquire::Retries \"3\";" > /etc/apt/apt.conf.d/80-retries
+FROM pqclean/multiarch-debian-debootstrap:powerpc-sid
 
 COPY ppc-sources.list /etc/apt/sources.list
 
