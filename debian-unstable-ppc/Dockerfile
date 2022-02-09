@@ -2,6 +2,8 @@ FROM pqclean/multiarch-debian-debootstrap:powerpc-sid
 
 COPY ppc-sources.list /etc/apt/sources.list
 
+ENV PQCLEAN_SKIP_TESTS=clang_tidy
+
 RUN wget http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archive-keyring/debian-ports-archive-keyring_2021.12.30_all.deb \
 # Install debian-ports keychain
  && dpkg -i debian-ports-archive-keyring_2021.12.30_all.deb \
