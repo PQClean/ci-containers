@@ -21,19 +21,23 @@ stages:
       matrix:
         armhf:
           arch: armhf
+          docker_arch: arm32v7
         arm64:
           arch: arm64
+          docker_arch: arm64v8
         i386:
           arch: i386
+          docker_arch: i386
         amd64:
           arch: amd64
+          docker_arch: amd64
     steps:
-    - script: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+    - script: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       displayName: Register QEMU wrappers
     - checkout: self
       fetchDepth: 1
     - script: |
-        docker build -t "pqclean/ci-container:$(arch)" --build-arg "ARCH=$(arch)" debian-bullseye
+        docker build -t "pqclean/ci-container:$(arch)" --build-arg "ARCH=$(docker_arch)" debian-bullseye
       displayName: Build container
     - script: |
         docker login --username $(dockerUsername) --password "$(dockerPassword)"
