@@ -1,5 +1,5 @@
 ARG ARCH
-FROM multiarch/debian-debootstrap:${ARCH}-bullseye
+FROM ${ARCH}/debian:bullseye-slim
 
 RUN apt-get update -qq \
  && apt-get upgrade -y \
