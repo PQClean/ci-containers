@@ -4,10 +4,13 @@ COPY ppc-sources.list /etc/apt/sources.list
 
 ENV PQCLEAN_SKIP_TESTS=clang_tidy
 
-RUN wget http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archive-keyring/debian-ports-archive-keyring_2021.12.30_all.deb \
+RUN  \
+ PKGVER=$(wget -O- http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archive-keyring/ 2>/dev/null | sed -n 's/.*-keyring_\(.*\)_all.*/\1/p' -) \
+ && echo "Fetching debian keyring version ${PKGVER}" \
+ && wget http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archive-keyring/debian-ports-archive-keyring_${PKGVER}_all.deb \
 # Install debian-ports keychain
- && dpkg -i debian-ports-archive-keyring_2021.12.30_all.deb \
- && rm debian-ports-archive-keyring_2021.12.30_all.deb \
+ && dpkg -i debian-ports-archive-keyring_${PKGVER}_all.deb \
+ && rm debian-ports-archive-keyring_${PKGVER}_all.deb \
 # Update to unstable
  && apt-get update -qq \
  && apt-get upgrade -q -y \
