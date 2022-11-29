@@ -23,9 +23,9 @@ RUN apt-get update -qq \
 # Install clang 11
  && echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list.d/experimental.list \
  && apt-get update -qq \
- && apt-get install -y -q clang-11 clang-tidy-11 \
- && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-11 100 \
- && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-11 100 \
+ && apt-get install -y -q clang-14 clang-tidy-14 \
+ && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-14 100 \
+ && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-14 100 \
  && apt-get autoremove -y \
 # Python deps
  && pip3 install PyYAML pytest pytest-xdist pycparser py-cpuinfo \
