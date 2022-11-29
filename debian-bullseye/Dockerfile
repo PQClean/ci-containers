@@ -8,7 +8,6 @@ RUN apt-get update -qq \
  && apt-get install -y -q \
         astyle \
         ccache \
-        gcc \
         git-core \
         make \
         python3-dev \
@@ -19,11 +18,12 @@ RUN apt-get update -qq \
         python3-pycparser \
         python3-rednose \
         python3-yaml \
-        valgrind \
-# Install clang 11
- && echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list.d/experimental.list \
+# Install clang 14
+ #&& echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list.d/experimental.list \
+ && echo "deb http://deb.debian.org/debian unstable main" >> /etc/apt/sources.list.d/unstable.list \
  && apt-get update -qq \
- && apt-get install -y -q clang-14 clang-tidy-14 \
+ && apt-get install -y -q gcc-12 clang-14 clang-tidy-14 valgrind \
+ && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100 \
  && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-14 100 \
  && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-14 100 \
  && apt-get autoremove -y \
