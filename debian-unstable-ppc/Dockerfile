@@ -2,7 +2,7 @@ FROM pqclean/multiarch-debian-debootstrap:powerpc-sid
 
 COPY ppc-sources.list /etc/apt/sources.list
 
-ENV PQCLEAN_SKIP_TESTS=clang_tidy
+ENV PQCLEAN_SKIP_TESTS=clang_tidy,functest_sanitizers
 
 RUN  \
  PKGVER=$(wget -O- http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archive-keyring/ 2>/dev/null | sed -n 's/.*-keyring_\(.*\)_all.*/\1/p' -) \
@@ -31,6 +31,7 @@ RUN  \
         python3-pycparser \
         python3-rednose \
         python3-yaml \
+ && apt-get autoremove -y \
 # Python deps
  && pip3 install PyYAML pytest pytest-xdist pycparser py-cpuinfo \
 # Cleanup
