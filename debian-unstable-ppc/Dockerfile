@@ -19,8 +19,8 @@ RUN  \
  && apt-get install -q -y \
         astyle \
         ccache \
-        clang \
-        clang-tidy \
+        clang-13 \
+        clang-tidy-13 \
         gcc \
         git-core \
         make \
