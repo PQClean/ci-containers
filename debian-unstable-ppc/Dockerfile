@@ -2,7 +2,7 @@ FROM pqclean/multiarch-debian-debootstrap:powerpc-sid
 
 COPY ppc-sources.list /etc/apt/sources.list
 
-ENV PQCLEAN_SKIP_TESTS=clang_tidy,functest_sanitizers
+ENV PQCLEAN_SKIP_TESTS=clang_tidy,functest_sanitizers,astyle
 
 RUN  \
  PKGVER=$(wget -O- http://ftp.ports.debian.org/debian-ports/pool/main/d/debian-ports-archive-keyring/ 2>/dev/null | sed -n 's/.*-keyring_\(.*\)_all.*/\1/p' -) \
@@ -17,7 +17,6 @@ RUN  \
  && apt-get dist-upgrade -q -y \
 # Install build dependencies
  && apt-get install -q -y \
-        astyle \
         ccache \
         clang-13 \
         clang-tidy-13 \
@@ -34,6 +33,6 @@ RUN  \
  && apt-get autoremove -y \
  && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-13 100 \
 # Python deps
- && pip3 install PyYAML pytest pytest-xdist pycparser py-cpuinfo \
+ && pip3 install --break-system-packages PyYAML pytest pytest-xdist pycparser py-cpuinfo \
 # Cleanup
  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
