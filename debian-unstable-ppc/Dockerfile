@@ -34,6 +34,6 @@ RUN  \
  && apt-get autoremove -y \
  && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-13 100 \
 # Python deps
- && pip3 install PyYAML pytest pytest-xdist pycparser py-cpuinfo \
+ && pip3 install --break-system-packages PyYAML pytest pytest-xdist pycparser py-cpuinfo \
 # Cleanup
  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*

@@ -1,5 +1,5 @@
 ARG ARCH
-FROM ${ARCH}/debian:bullseye-slim
+FROM ${ARCH}/debian:bookworm-slim
 
 RUN apt-get update -qq \
  && apt-get upgrade -y \

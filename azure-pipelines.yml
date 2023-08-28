@@ -37,7 +37,7 @@ stages:
     - checkout: self
       fetchDepth: 1
     - script: |
-        docker build -t "pqclean/ci-container:$(arch)" --build-arg "ARCH=$(docker_arch)" debian-bullseye
+        docker build -t "pqclean/ci-container:$(arch)" --build-arg "ARCH=$(docker_arch)" debian-bookworm
       displayName: Build container
     - script: |
         docker login --username $(dockerUsername) --password "$(dockerPassword)"
