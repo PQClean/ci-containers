@@ -6,8 +6,8 @@ RUN apt-get update -qq \
  && apt-get dist-upgrade -y -q \
 # Install build dependencies
  && apt-get install -y -q \
-        astyle \
         ccache \
+	cmake \
         git-core \
         make \
         python3-dev \
@@ -18,16 +18,22 @@ RUN apt-get update -qq \
         python3-pycparser \
         python3-rednose \
         python3-yaml \
-# Install clang 14
- #&& echo "deb http://deb.debian.org/debian experimental main" >> /etc/apt/sources.list.d/experimental.list \
- && echo "deb http://deb.debian.org/debian unstable main" >> /etc/apt/sources.list.d/unstable.list \
- && apt-get update -qq \
- && apt-get install -y -q gcc-12 clang-14 clang-tidy-14 valgrind \
- && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100 \
- && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-14 100 \
- && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-14 100 \
+ 	gcc \
+	clang \
+	clang-tidy \
+	valgrind \
  && apt-get autoremove -y \
 # Python deps
- && pip3 install PyYAML pytest pytest-xdist pycparser py-cpuinfo \
+ && pip3 install --break-system-packages PyYAML pytest pytest-xdist pycparser py-cpuinfo \
+# AStyle
+ && git clone --depth=1 --branch=3.4.5 https://gitlab.com/saalen/astyle.git /tmp/astyle \
+ && cd /tmp/astyle \
+ && mkdir build \
+ && cd build \
+ && cmake -DCMAKE_BUILD_TYPE=Release .. \
+ && make -j3 \
+ && make install \
+ && rm -rf /tmp/astyle \
 # Cleanup
  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
