@@ -26,7 +26,7 @@ RUN apt-get update -qq \
 # Python deps
  && pip3 install --break-system-packages PyYAML pytest pytest-xdist pycparser py-cpuinfo \
 # AStyle
- && git clone --depth=1 --branch=3.4.5 https://gitlab.com/saalen/astyle.git /tmp/astyle \
+ && git clone --depth=1 --branch=3.4.11 https://gitlab.com/saalen/astyle.git /tmp/astyle \
  && cd /tmp/astyle \
  && mkdir build \
  && cd build \
